@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CloudCart | Online Shopping</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
@@ -20,7 +18,7 @@
         header {
             background: #172554;
             color: white;
-            padding: 22px 8%;
+            padding: 20px 7%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -28,39 +26,50 @@
             gap: 12px;
         }
 
-        header h1 {
-            margin: 0;
-        }
+        header h1 { margin: 0; }
 
-        header a {
+        nav a {
             color: white;
             text-decoration: none;
-            margin-left: 18px;
+            margin-left: 15px;
         }
 
         .hero {
-            padding: 55px 8%;
+            padding: 45px 7%;
             background: #dbeafe;
             text-align: center;
         }
 
-        .hero h2 {
-            font-size: 36px;
-            margin-bottom: 12px;
+        .hero h2 { font-size: 34px; }
+
+        .products, .cart-section { padding: 30px 7%; }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
         }
 
-        .hero p {
-            color: #475569;
+        .filters button {
+            border: 1px solid #2563eb;
+            background: white;
+            color: #1d4ed8;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
         }
 
-        .products {
-            padding: 35px 8%;
+        .filters button.active,
+        .filters button:hover {
+            background: #2563eb;
+            color: white;
         }
 
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-            gap: 22px;
+            gap: 20px;
         }
 
         .product {
@@ -71,28 +80,67 @@
             box-shadow: 0 3px 12px #0000000d;
         }
 
-        .product .emoji {
-            font-size: 55px;
+        .emoji { font-size: 48px; }
+
+        .category {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 5px 9px;
+            border-radius: 12px;
+            font-size: 12px;
         }
 
-        .product button {
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .product button, .checkout-button {
             background: #2563eb;
             color: white;
             border: none;
             border-radius: 7px;
-            padding: 11px 18px;
+            padding: 11px 16px;
             cursor: pointer;
         }
 
-        .product button:hover {
+        .product button:hover, .checkout-button:hover {
             background: #1d4ed8;
         }
 
+        .cart-item {
+            background: white;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .remove-button {
+            background: #fee2e2;
+            color: #991b1b;
+            border: none;
+            border-radius: 5px;
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+
         footer {
-            padding: 22px;
+            padding: 20px;
             background: #172554;
             color: white;
             text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            header { padding: 18px 5%; }
+            nav a { margin-left: 8px; }
+            .hero h2 { font-size: 27px; }
+            .products, .cart-section { padding: 25px 5%; }
         }
     </style>
 </head>
@@ -108,18 +156,25 @@
 
     <section class="hero" id="home">
         <h2>Welcome to CloudCart</h2>
-        <p>Discover your favourite products in one place.</p>
+        <p>Discover electronics, fashion, accessories and more!</p>
     </section>
 
     <main class="products" id="products">
         <h2>Our Products</h2>
+        <p id="product-status">Loading products...</p>
+
+        <div class="filters" id="category-filters"></div>
         <div class="product-grid" id="product-grid"></div>
     </main>
 
-    <section class="products" id="cart">
+    <section class="cart-section" id="cart">
         <h2>Your Shopping Cart</h2>
         <div id="cart-items">Your cart is empty.</div>
         <h3 id="cart-total">Total: ₹0</h3>
+        <button class="checkout-button" id="checkout-button">
+            Checkout
+        </button>
+        <p id="checkout-message"></p>
     </section>
 
     <footer>
@@ -127,42 +182,114 @@
     </footer>
 
     <script>
-        const products = [
-            { id: 1, name: "Headphones", price: 999, emoji: "🎧" },
-            { id: 2, name: "Smart Watch", price: 1499, emoji: "⌚" },
-            { id: 3, name: "Laptop Bag", price: 799, emoji: "🎒" },
-            { id: 4, name: "Keyboard", price: 1199, emoji: "⌨️" }
-        ];
-
-        const cart = [];
+        let products = [];
+        let cart = [];
+        let selectedCategory = "All";
 
         const productGrid = document.getElementById("product-grid");
+        const filters = document.getElementById("category-filters");
 
-        products.forEach(product => {
-            const card = document.createElement("article");
-            card.className = "product";
+        async function loadProducts() {
+            const status = document.getElementById("product-status");
 
-            const emoji = document.createElement("div");
-            emoji.className = "emoji";
-            emoji.textContent = product.emoji;
+            try {
+                const response = await fetch("/api/products");
 
-            const name = document.createElement("h3");
-            name.textContent = product.name;
+                if (!response.ok) {
+                    throw new Error("Unable to load products.");
+                }
 
-            const price = document.createElement("p");
-            price.textContent = `₹${product.price}`;
+                products = await response.json();
 
-            const button = document.createElement("button");
-            button.textContent = "Add to Cart";
-            button.addEventListener("click", () => addToCart(product.id));
+                if (!Array.isArray(products)) {
+                    throw new Error("Invalid product data.");
+                }
 
-            card.append(emoji, name, price, button);
-            productGrid.appendChild(card);
-        });
+                status.textContent = `${products.length} products available`;
+                createCategoryFilters();
+                renderProducts();
+            } catch (error) {
+                status.textContent =
+                    "Could not load products. Please refresh the page.";
+                console.error(error);
+            }
+        }
+
+        function createCategoryFilters() {
+            filters.replaceChildren();
+
+            const categories = [
+                "All",
+                ...new Set(products.map(product => product.category))
+            ];
+
+            categories.forEach(category => {
+                const button = document.createElement("button");
+                button.textContent = category;
+                button.className =
+                    category === selectedCategory ? "active" : "";
+
+                button.addEventListener("click", () => {
+                    selectedCategory = category;
+                    createCategoryFilters();
+                    renderProducts();
+                });
+
+                filters.appendChild(button);
+            });
+        }
+
+        function renderProducts() {
+            productGrid.replaceChildren();
+
+            const visibleProducts = selectedCategory === "All"
+                ? products
+                : products.filter(
+                    product => product.category === selectedCategory
+                );
+
+            visibleProducts.forEach(product => {
+                const card = document.createElement("article");
+                card.className = "product";
+
+                const emoji = document.createElement("div");
+                emoji.className = "emoji";
+                emoji.textContent = product.emoji || "🛍️";
+
+                const name = document.createElement("h3");
+                name.textContent = product.name;
+
+                const category = document.createElement("span");
+                category.className = "category";
+                category.textContent = product.category || "Other";
+
+                const price = document.createElement("p");
+                price.className = "price";
+                price.textContent =
+                    `₹${Number(product.price).toLocaleString("en-IN")}`;
+
+                const button = document.createElement("button");
+                button.textContent = "Add to Cart";
+                button.addEventListener("click", () => addToCart(product.id));
+
+                card.append(emoji, name, category, price, button);
+                productGrid.appendChild(card);
+            });
+        }
 
         function addToCart(productId) {
             const product = products.find(item => item.id === productId);
-            cart.push(product);
+
+            if (product) {
+                cart.push(product);
+                renderCart();
+
+                document.getElementById("checkout-message").textContent = "";
+            }
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
             renderCart();
         }
 
@@ -175,17 +302,52 @@
             if (cart.length === 0) {
                 cartItems.textContent = "Your cart is empty.";
             } else {
-                cart.forEach(product => {
-                    const item = document.createElement("p");
-                    item.textContent = `${product.name} — ₹${product.price}`;
+                cart.forEach((product, index) => {
+                    const item = document.createElement("div");
+                    item.className = "cart-item";
+
+                    const description = document.createElement("span");
+                    description.textContent =
+                        `${product.name} — ₹${Number(product.price).toLocaleString("en-IN")}`;
+
+                    const removeButton = document.createElement("button");
+                    removeButton.className = "remove-button";
+                    removeButton.textContent = "Remove";
+                    removeButton.addEventListener(
+                        "click",
+                        () => removeFromCart(index)
+                    );
+
+                    item.append(description, removeButton);
                     cartItems.appendChild(item);
                 });
             }
 
-            const total = cart.reduce((sum, product) => sum + product.price, 0);
+            const total = cart.reduce(
+                (sum, product) => sum + Number(product.price),
+                0
+            );
+
             document.getElementById("cart-total").textContent =
                 `Total: ₹${total.toLocaleString("en-IN")}`;
         }
+
+        document.getElementById("checkout-button").addEventListener(
+            "click",
+            () => {
+                const message = document.getElementById("checkout-message");
+
+                if (cart.length === 0) {
+                    message.textContent = "Please add products to your cart first.";
+                } else {
+                    message.textContent =
+                        "Demo checkout only. Online payment is not configured.";
+                }
+            }
+        );
+
+        loadProducts();
     </script>
 </body>
 </html>
+
