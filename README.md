@@ -1,61 +1,50 @@
- Cloud-native E-Commerce Website
+ # CloudCart – Cloud-Based E-Commerce Website
 
-Project Overview
+## Project Overview
 
-CloudCart is a cloud-based e-commerce website developed to provide a simple and user-friendly online shopping experience. Users can browse products, explore different categories, view product details, and simulate payments through a demo checkout system.
+A cloud-based e-commerce web application that allows users to browse products, explore different categories, and interact with an online shopping platform. The application is built using Python and Flask and deployed on the cloud to demonstrate cloud hosting, application deployment, and web development concepts.
 
-The project demonstrates the use of web development and cloud deployment technologies to build and host an online shopping application.
+## Technologies Used
 
- Objectives
+- Python
+- Flask
+- HTML5
+- CSS3
+- JavaScript
+- Docker
+- Render (Cloud Deployment)
+- GitHub
 
-Develop a user-friendly online shopping website.
+## Features
 
-Display products with prices and categories.
+- User-friendly e-commerce interface
+- Product listing with product details
+- Multiple product categories
+- Product browsing and shopping experience
+- Responsive web design
+- Backend integration using Flask
+- REST API for product information
+- Health-check endpoint for application monitoring
+- Cloud-based application deployment using Render
+- Demo payment interface (no real transactions)
 
-Provide a simple shopping experience.
+## Cloud Deployment
 
-Implement a demo payment interface.
+The application is containerized using Docker and deployed on Render.
 
-Deploy the application on a cloud hosting platform.
+- **Containerization:** Docker
+- **Cloud Hosting:** Render
+- **Source Code Management:** GitHub
+- **Deployment:** Cloud-based web application hosting
+- **Health Monitoring:** Application health-check endpoint
 
-Understand cloud deployment and web application development.
+## Run Locally
 
- Features
-Product Listing: Browse available products.
- Product Categories: Explore products by category.
+1. Clone this repository.
+2. Install the dependencies: `pip install -r requirements.txt`
+3. Run the application: `python app.py`
+4. Open the application in your browser using the local URL displayed in the terminal.
 
-Product Pricing: View product prices.
+## Project Objective
 
- Demo Payment: Simulate the checkout and payment process without processing real payments.
-
- Cloud Deployment: Access the application online.
-
- Simple Interface: Navigate the website easily.
-
- Portfolio Project: Demonstrates practical web development and cloud deployment skills.
-
- Technologies Used
-
-Python – Backend development
-
-HTML – Web page structure
-
-CSS – Website styling
-
-Docker – Application containerization
-
-Render – Cloud deployment
-
-GitHub – Source code management and version control
-
-Project Architecture
-
-The user opens the CloudCart website.
-
-The frontend displays the available products and categories.
-
-The Python backend handles supported application requests.
-
-The user explores products and proceeds to the demo checkout.
-
-The application runs on a cloud hosting platform.
+To develop and deploy a cloud-based e-commerce application while gaining practical experience in Python web development, REST APIs, Docker containerization, cloud hosting, and application deployment.
