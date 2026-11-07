@@ -12,7 +12,7 @@ A cloud-based e-commerce web application that allows users to browse products, e
 - CSS3
 - JavaScript
 - Docker
-- streamlit(Cloud Deployment)
+- render(Cloud Deployment)
 - GitHub
 
 ## Features
@@ -33,7 +33,7 @@ A cloud-based e-commerce web application that allows users to browse products, e
 The application is containerized using Docker and deployed on Render.
 
 - **Containerization:** Docker
-- **Cloud Hosting:** streamlit
+- **Cloud Hosting:** Render
 - **Source Code Management:** GitHub
 - **Deployment:** Cloud-based web application hosting
 - **Health Monitoring:** Application health-check endpoint
