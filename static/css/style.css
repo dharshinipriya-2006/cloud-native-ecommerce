@@ -107,3 +107,122 @@ img {
         width: 94%;
     }
 }
+
+/* =====================================
+   CLOUDKART PROFESSIONAL HEADER UPGRADE
+===================================== */
+
+header.top-header {
+    background: linear-gradient(110deg, #1053b7, #1769e0);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+}
+
+header.top-header .header-main {
+    max-width: 1500px;
+    min-height: 82px;
+    padding: 14px 4%;
+    gap: 28px;
+}
+
+header.top-header .logo {
+    font-size: 29px;
+    letter-spacing: -1.2px;
+    line-height: 1.2;
+}
+
+header.top-header .logo small {
+    font-size: 10px;
+    letter-spacing: 1.3px;
+    margin-top: 3px;
+}
+
+header.top-header .search-box {
+    max-width: 680px;
+    border-radius: 9px;
+    border: 1px solid #e7edf7;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    transition: 0.2s ease;
+}
+
+header.top-header .search-box:focus-within {
+    box-shadow: 0 0 0 3px rgba(255, 230, 109, 0.3);
+}
+
+header.top-header .search-box input {
+    padding: 15px 18px;
+    font-size: 14px;
+}
+
+header.top-header .search-box button {
+    padding: 12px 20px;
+    background: #f4f7fc;
+}
+
+header.top-header .header-actions {
+    gap: 12px;
+}
+
+header.top-header .header-action {
+    padding: 11px 15px;
+    border-radius: 7px;
+    transition: 0.2s ease;
+}
+
+header.top-header .header-action:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* CATEGORY NAVIGATION UPGRADE */
+
+body .category-nav {
+    gap: 28px;
+    padding: 16px 4%;
+    background: #ffffff;
+    box-shadow: 0 3px 10px rgba(20, 40, 80, 0.04);
+}
+
+body .category-nav button {
+    padding: 8px 13px;
+    border-radius: 6px;
+    font-size: 13px;
+    transition: 0.2s ease;
+}
+
+body .category-nav button:hover {
+    background: #edf4ff;
+    color: #1769e0;
+}
+
+/* MOBILE HEADER */
+
+@media (max-width: 700px) {
+
+    header.top-header .header-main {
+        padding: 12px 4%;
+        gap: 12px;
+    }
+
+    header.top-header .logo {
+        font-size: 23px;
+    }
+
+    header.top-header .search-box {
+        flex-basis: 100%;
+        max-width: none;
+    }
+
+    header.top-header .header-actions {
+        gap: 5px;
+    }
+
+    header.top-header .header-action {
+        padding: 9px;
+        font-size: 12px;
+    }
+
+    body .category-nav {
+        gap: 12px;
+        padding: 12px 4%;
+    }
+}
+
