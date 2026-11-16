@@ -262,6 +262,136 @@ button {
     font-size: 11px;
 }
 
+/* =====================================
+   CLOUDKART PREMIUM HERO SECTION
+===================================== */
+
+.hero {
+    min-height: 360px;
+    padding: 55px 7%;
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 85% 20%, rgba(255,255,255,0.18), transparent 30%),
+        linear-gradient(115deg, #10234b 0%, #1769e0 65%, #69adff 100%);
+    box-shadow: 0 12px 30px rgba(20, 65, 130, 0.15);
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-label {
+    display: inline-block;
+    background: rgba(255, 230, 109, 0.15);
+    border: 1px solid rgba(255, 230, 109, 0.4);
+    border-radius: 30px;
+    padding: 8px 14px;
+    font-size: 11px;
+    letter-spacing: 1.8px;
+}
+
+.hero h1 {
+    font-size: clamp(34px, 4.5vw, 54px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.12;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    max-width: 490px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #e8f1ff;
+}
+
+.shop-button {
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.shop-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 20px rgba(0,0,0,0.2);
+}
+
+.hero-image {
+    width: min(38%, 360px);
+    height: 280px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.hero-image:hover {
+    transform: scale(1.06);
+}
+
+/* SERVICE STRIP UPGRADE */
+
+.service-strip {
+    margin-top: 24px;
+    padding: 25px 18px;
+    border: 1px solid #e9eef5;
+    box-shadow: 0 5px 20px rgba(20,40,80,0.05);
+}
+
+.service-item {
+    padding: 10px;
+    border-radius: 9px;
+    transition: background 0.2s ease;
+}
+
+.service-item:hover {
+    background: #f2f7ff;
+}
+
+.service-icon {
+    font-size: 30px;
+}
+
+/* RESPONSIVE HERO */
+
+@media (max-width: 700px) {
+    .hero {
+        min-height: 300px;
+        padding: 35px 6%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .hero-image {
+        width: 100%;
+        max-height: 170px;
+        align-self: center;
+    }
+
+    .service-strip {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 15px;
+    }
+
+    .service-item {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 400px) {
+    .service-strip {
+        grid-template-columns: 1fr;
+    }
+}
+
+
 /* CATEGORY CARDS */
 
 .section {
