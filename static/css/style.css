@@ -1,0 +1,109 @@
+
+/* =================================
+   CLOUDKART - GLOBAL DESIGN SYSTEM
+================================= */
+
+:root {
+    --primary: #1769e0;
+    --primary-dark: #1053b7;
+    --accent: #ffcc33;
+
+    --background: #f5f7fb;
+    --surface: #ffffff;
+
+    --text-primary: #172337;
+    --text-secondary: #6b7280;
+
+    --border: #e8edf4;
+    --success: #159957;
+    --danger: #dc3545;
+
+    --radius: 12px;
+    --shadow: 0 4px 18px rgba(20, 40, 80, 0.07);
+}
+
+/* RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* COMMON CONTAINER */
+
+.container {
+    width: 92%;
+    max-width: 1450px;
+    margin: 0 auto;
+}
+
+/* COMMON BUTTONS */
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 7px;
+    font-weight: 700;
+    transition: 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* PRODUCT CARDS */
+
+.product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: 0.25s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+    .container {
+        width: 94%;
+    }
+}
