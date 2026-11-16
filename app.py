@@ -123,6 +123,10 @@ products = [
 def home():
     return render_template("index.html")
 
+@app.route("/products")
+def products_page():
+    return render_template("products.html", products=products)
+
 
 @app.route("/api/products")
 def get_products():
