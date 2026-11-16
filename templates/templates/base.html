@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}CloudKart{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <header class="top-header">
+        <div class="header-main">
+
+            <a href="/" class="logo">
+                CloudKart.
+                <small>SHOP SMARTER</small>
+            </a>
+
+            <div class="header-actions">
+                <a href="/" class="header-action">Home</a>
+                <a href="/products" class="header-action">Products</a>
+                <a href="/cart" class="header-action">Cart</a>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="page-container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 CloudKart. All rights reserved.</p>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+
+</body>
+</html>
