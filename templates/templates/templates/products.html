@@ -1,0 +1,54 @@
+
+{% extends "base.html" %}
+
+{% block title %}All Products | CloudKart{% endblock %}
+
+{% block content %}
+
+<section class="products-page">
+
+    <div class="section-heading">
+        <h1>Explore Our Products</h1>
+        <p>Discover quality products at great prices.</p>
+    </div>
+
+    <div class="product-grid">
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            <div class="product-image-wrap">
+                <div class="product-emoji">
+                    {{ product.emoji }}
+                </div>
+            </div>
+
+            <p class="product-category">
+                {{ product.category }}
+            </p>
+
+            <h3 class="product-name">
+                {{ product.name }}
+            </h3>
+
+            <p class="product-price">
+                ₹{{ product.price }}
+            </p>
+
+            <button
+                class="add-button"
+                onclick="addToCart({{ product.id }})">
+                Add to Cart
+            </button>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}
+
